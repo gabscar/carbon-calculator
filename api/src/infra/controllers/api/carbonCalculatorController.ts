@@ -29,7 +29,7 @@ export class CarbonCalculatorController extends BaseController {
     const totalEmissions = await this.carbonCalculateUseCase.exec(validatedData);
 
     res.status(200).json({
-      totalEmissions,
+      ...totalEmissions,
       unit: 'kg CO2e',
     });
   }

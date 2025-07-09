@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <AppBar position="static">
       <Toolbar sx={{ justifyContent: 'space-between' }} className="bg-primary text-white">
-        <Typography variant="h6" sx={{ flexShrink: 0 }}>Carbon Calculator</Typography>
+        <Typography variant="h6" sx={{ flexShrink: 0 }}>Carbon Footprint</Typography>
 
         {isMobile ? (
           <IconButton edge="end" color="inherit" onClick={() => setDrawerOpen(true)}>

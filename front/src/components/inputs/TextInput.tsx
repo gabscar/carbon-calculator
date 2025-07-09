@@ -41,19 +41,14 @@ const TextInput: React.FC<Props> = ({ name, label, control, type = "text", ...re
       error={!!error}
       helperText={error ? error.message : '\u00A0'}
       fullWidth
-      sx={{ 
-        minHeight: 56,
+      sx={{
         '& input[type=number]': {
-          '-moz-appearance': 'textfield'
-        },
-        '& input[type=number]::-webkit-outer-spin-button': {
-          '-webkit-appearance': 'none',
-          margin: 0
+          MozAppearance: 'textfield',
         },
         '& input[type=number]::-webkit-inner-spin-button': {
-          '-webkit-appearance': 'none',
-          margin: 0
-        }
+          WebkitAppearance: 'none',
+          margin: 0,
+        },
       }}
       type={type}
       {...rest}

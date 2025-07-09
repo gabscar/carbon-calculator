@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import CarbonCalculatorForm, {
-  carbonCalculatorSchemaValidation,
-  type CarbonCalculatorFormInput,
-} from '@/components/forms/CarbonCalculatorForm';
+import CarbonCalculatorForm from '@/components/forms/carbonForm/CarbonCalculatorForm';
 
 import { Box, Grid, Typography } from '@mui/material';
-import { ResultCalculator, type ResultCalculatorProps } from '@/components/calculator/ResultCalculator';
+import { ResultCalculator } from '@/components/calculator/ResultCalculator';
+import { CalculateCarbonService, type CalculateCarbonResponse } from '@/api/services/calculateCarbon';
+import { carbonCalculatorSchemaValidation, type CarbonCalculatorFormInput } from '@/components/forms/carbonForm/types';
+import { scrollToRef } from '@/utils/scrollToRef';
+import { toast } from 'react-toastify';
 
 const CarbonCalculator: React.FC = () => {
   const { control, handleSubmit } = useForm<CarbonCalculatorFormInput>({
     resolver: zodResolver(carbonCalculatorSchemaValidation),
     defaultValues: {
-      vehicles: [{ type: 'car', distance: 0, isMaintained: false }],
+      transportation: [{ type: 'car', distance: 0, isMantainance: false }],
       energy: { electricity: 0, natural_gas: 0, fuel_oil: 0, propane: 0 },
       waste: {
         recycle_paper: false,
@@ -22,19 +23,31 @@ const CarbonCalculator: React.FC = () => {
         recycle_metal: false,
         no_recycling: false,
       },
-      people: 1,
+      persons: 1,
     },
   });
-  const [result] = useState<ResultCalculatorProps>({
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<CalculateCarbonResponse>({
     transportationEmissions: 0,
     energyEmissions: 0,
     wasteEmissions: 0,
     dietEmissions: 0,
     totalEmissions: 0,
+    unit: 'kg CO2e',
   });
 
-  const onSubmit = (data: CarbonCalculatorFormInput) => {
-    console.log(data);
+  const onSubmit = async (data: CarbonCalculatorFormInput) => {
+    setLoading(true);
+    try {
+      const result = await new CalculateCarbonService().calculateCarbon(data);
+      setResult(result);
+    } catch (error) {
+      toast.error('Error calculating carbon footprint');
+    } finally {
+      setLoading(false);
+      scrollToRef(sectionRef as React.RefObject<HTMLElement>);
+    }
   };
 
   return (
@@ -51,18 +64,24 @@ const CarbonCalculator: React.FC = () => {
           <Typography variant="h5" mb={2}>
             Personal Carbon Calculator
           </Typography>
-          <CarbonCalculatorForm control={control} />
+          <Typography variant="body1" color="text.secondary" mb={2}>
+            This calculator helps you estimate your personal carbon footprint per year based on your lifestyle and habits.
+          </Typography>
+          <CarbonCalculatorForm control={control} loading={loading} />
         </Box>
       </Grid>
 
       <Grid size={{ xs: 10, md: 4 }}>
-        <ResultCalculator
-          transportationEmissions={result.transportationEmissions}
-          energyEmissions={result.energyEmissions}
-          wasteEmissions={result.wasteEmissions}
-          dietEmissions={result.dietEmissions}
-          totalEmissions={result.totalEmissions}
-        />
+        <div ref={sectionRef}>
+          <ResultCalculator
+            transportationEmissions={result.transportationEmissions}
+            energyEmissions={result.energyEmissions}
+            wasteEmissions={result.wasteEmissions}
+            dietEmissions={result.dietEmissions}
+            totalEmissions={result.totalEmissions}
+            unit={result.unit}
+          />
+        </div>
       </Grid>
     </Grid>
   );

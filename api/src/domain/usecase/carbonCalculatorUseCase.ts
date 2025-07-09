@@ -8,6 +8,7 @@ export interface ICarbonCalculatorUseCaseResponse {
   energyEmissions: number;
   wasteEmissions: number;
   dietEmissions: number;
+  totalEmissions: number;
 }
 export type CarbonCalculatorInput = z.infer<typeof carbonCalculatorSchema>;
 

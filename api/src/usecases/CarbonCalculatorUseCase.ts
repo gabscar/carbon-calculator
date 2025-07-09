@@ -3,6 +3,7 @@ import { IEnergyEmissionService } from '../domain/services/IEnergyEmissionServic
 import { IWasteEmissionService } from '../domain/services/IWasteEmissionService';
 import { IDietEmissionService } from '../domain/services/IDietEmissionService';
 import { CarbonCalculatorInput, ICarbonCalculatorUseCase, ICarbonCalculatorUseCaseResponse } from '../domain/usecase/carbonCalculatorUseCase';
+import { RoundMethods } from '../utils/round';
 
 
 export class CarbonCalculatorUseCase implements ICarbonCalculatorUseCase {
@@ -14,11 +15,12 @@ export class CarbonCalculatorUseCase implements ICarbonCalculatorUseCase {
   ) { }
 
   async exec(input: CarbonCalculatorInput): Promise<ICarbonCalculatorUseCaseResponse> {
-    const transportationEmissions = this.transportationService.exec(input.transportation);
-    const energyEmissions = this.energyService.exec(input.energy);
-    const wasteEmissions = this.wasteService.exec(input.waste,input.persons);
-    const dietEmissions = this.dietService.exec(input.persons) * 1000;
-
-    return { transportationEmissions, energyEmissions, wasteEmissions, dietEmissions };
+    const transportationEmissions = RoundMethods.roundToTwoDecimals(this.transportationService.exec(input.transportation));
+    const energyEmissions = RoundMethods.roundToTwoDecimals(this.energyService.exec(input.energy));
+    const wasteEmissions = RoundMethods.roundToTwoDecimals(this.wasteService.exec(input.waste,input.persons));
+    const dietEmissions = RoundMethods.roundToTwoDecimals(this.dietService.exec(input.persons) * 1000);
+    const totalEmissions = transportationEmissions + energyEmissions + wasteEmissions + dietEmissions;
+    
+    return { transportationEmissions, energyEmissions, wasteEmissions, dietEmissions, totalEmissions };
   }
 } 
