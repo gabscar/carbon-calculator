@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+      <Toolbar sx={{ justifyContent: 'space-between' }} className="bg-primary text-white">
         <Typography variant="h6" sx={{ flexShrink: 0 }}>Carbon Calculator</Typography>
 
         {isMobile ? (
@@ -39,6 +39,7 @@ export default function Header() {
               <ListItem
                 component="button"
                 key={item.path}
+                className="bg-primary text-white"
                 onClick={() => {
                   navigate(item.path);
                   setDrawerOpen(false);

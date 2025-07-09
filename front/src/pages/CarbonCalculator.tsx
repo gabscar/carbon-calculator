@@ -25,7 +25,7 @@ const CarbonCalculator: React.FC = () => {
       people: 1,
     },
   });
-  const [result, setResult] = useState<ResultCalculatorProps>({
+  const [result] = useState<ResultCalculatorProps>({
     transportationEmissions: 0,
     energyEmissions: 0,
     wasteEmissions: 0,

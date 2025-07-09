@@ -9,9 +9,7 @@ import { z } from 'zod';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CustomButton from '@/components/button/Button';
 import PeopleIcon from '@mui/icons-material/People';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import BoltIcon from '@mui/icons-material/Bolt';
-import RecyclingIcon from '@mui/icons-material/Recycling';
+
 
 const vehicleOptions = [
     { label: 'Car', value: 'car' },

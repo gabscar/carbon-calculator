@@ -10,10 +10,10 @@ export class Transportation {
   constructor(
     public type: TransportType,
     public distance: number,
-    public isMantainance: boolean = true
+    public isMantainance?: boolean
   ) {}
 
-  static create(type: string, distance: number): Transportation {
+  static create(type: string, distance: number, isMantainance?: boolean): Transportation {
     const validTypes = Object.values(TransportType);
 
     if (!validTypes.includes(type as TransportType)) {
@@ -26,6 +26,6 @@ export class Transportation {
       throw new Error('Distance cannot be negative');
     }
 
-    return new Transportation(type as TransportType, distance);
+    return new Transportation(type as TransportType, distance, isMantainance);
   }
 }
