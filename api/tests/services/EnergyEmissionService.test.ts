@@ -1,7 +1,8 @@
-import { Energy } from '../../domain/entities/energy';
-import { EnergyEmissionService } from '../../infra/services/EnergyEmissionService';
-import { mockedEmissionFactors } from '../mocks/emission_factors';
-jest.mock('../../infra/db/emission_factors.json', () => (require('../mocks/emission_factors').mockedEmissionFactors));
+import { EnergyEmissionService } from '../../src/infra/services/EnergyEmissionService';
+import { Energy } from '../../src/domain/entities/energy';
+const mockedEmissionFactors = require('../mocks/emission_factors').mockedEmissionFactors;
+
+jest.mock('../../src/infra/db/emission_factors.json', () => require('../mocks/emission_factors').mockedEmissionFactors);
 describe('EnergyEmissionService', () => {
   it('calculates emissions for electricity and natural gas', () => {
     const service = new EnergyEmissionService();

@@ -25,4 +25,4 @@ RUN npm install --only=production
 COPY --from=builder /usr/src/app/dist ./dist
 
 EXPOSE ${PORT}
-CMD [ "node", "dist/main.js" ]
+CMD [ "node", "dist/src/main.js" ]

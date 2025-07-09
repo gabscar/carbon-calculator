@@ -1,10 +1,9 @@
-import { TransportType } from '../../domain/entities/transportation';
-import { CarbonCalculatorController } from '../../infra/controllers/api/carbonCalculatorController';
+import { TransportType } from '../../src/domain/entities/transportation';
+import { CarbonCalculatorController } from '../../src/infra/controllers/api/carbonCalculatorController';
 import { Request, Response } from 'express';
 
 
-jest.mock('../../infra/db/emission_factors.json', () => (require('../mocks/emission_factors').mockedEmissionFactors));
-
+jest.mock('../../src/infra/db/emission_factors.json', () => require('../mocks/emission_factors').mockedEmissionFactors);
 
 describe('CarbonCalculatorController', () => {
   let controller: CarbonCalculatorController;
@@ -43,13 +42,12 @@ describe('CarbonCalculatorController', () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      totalEmissions: expect.objectContaining({
-        dietEmissions: 2500,
-        transportationEmissions: 44.85000000000001,
-        energyEmissions: 133,
-        wasteEmissions: -0.37
-      }),
-      "unit": "kg CO2e"
+      'dietEmissions': 208.33,
+      'transportationEmissions': 44.85,
+      'energyEmissions': 133,
+      'wasteEmissions': -0.03,
+      "unit": "kg CO2e",
+      'totalEmissions': 386.15
     });
   });
 
@@ -65,12 +63,11 @@ describe('CarbonCalculatorController', () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      totalEmissions: expect.objectContaining({
-        dietEmissions: 2500,
-        transportationEmissions: 0,
-        energyEmissions: 0,
-        wasteEmissions: 0
-      }),
+      dietEmissions: 208.33,
+      transportationEmissions: 0,
+      energyEmissions: 0,
+      wasteEmissions: 0,
+      totalEmissions: 208.33,
       "unit": "kg CO2e"
     });
   });

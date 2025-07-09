@@ -20,6 +20,6 @@ export class WasteEmissionService implements IWasteEmissionService {
       totalEmissions += emissionFactors.waste.no_recycling.emission_factor;
     }
 
-    return totalEmissions * persons;
+    return totalEmissions * persons/12;
   }
 } 

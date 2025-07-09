@@ -1,7 +1,8 @@
-import { Waste } from '../../domain/entities/waste';
-import { WasteEmissionService } from '../../infra/services/WasteEmissionService';
-import { mockedEmissionFactors } from '../mocks/emission_factors';
-jest.mock('../../infra/db/emission_factors.json', () => (require('../mocks/emission_factors').mockedEmissionFactors));
+import { WasteEmissionService } from '../../src/infra/services/WasteEmissionService';
+import { Waste } from '../../src/domain/entities/waste';
+const mockedEmissionFactors = require('../mocks/emission_factors').mockedEmissionFactors;
+
+jest.mock('../../src/infra/db/emission_factors.json', () => require('../mocks/emission_factors').mockedEmissionFactors);
 describe('WasteEmissionService', () => {
   it('calculates emissions for recycling and no recycling', () => {
     const service = new WasteEmissionService();
@@ -12,7 +13,7 @@ describe('WasteEmissionService', () => {
       no_recycling: true
     };
     const result = service.exec(input,1);
-    const expected = mockedEmissionFactors.waste.recycle_paper.emission_factor + mockedEmissionFactors.waste.recycle_metal.emission_factor + mockedEmissionFactors.waste.no_recycling.emission_factor;
+    const expected = (mockedEmissionFactors.waste.recycle_paper.emission_factor + mockedEmissionFactors.waste.recycle_metal.emission_factor + mockedEmissionFactors.waste.no_recycling.emission_factor)/12;
     expect(result).toBeCloseTo(expected, 2);
   });
 

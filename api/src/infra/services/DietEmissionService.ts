@@ -7,6 +7,6 @@ export class DietEmissionService implements IDietEmissionService {
     if (persons <= 0) {
       throw new Error('Persons must be greater than 0');
     }
-    return emissionFactors.diet[DietType.AVERAGE].emission_factor * persons;
+    return emissionFactors.diet[DietType.AVERAGE].emission_factor * persons/12;
   }
 } 

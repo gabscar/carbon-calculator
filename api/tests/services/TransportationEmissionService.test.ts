@@ -1,8 +1,8 @@
-import { Transportation, TransportType } from '../../domain/entities/transportation';
-import { TransportationEmissionService } from '../../infra/services/TransportationEmissionService';
-import { mockedEmissionFactors } from '../mocks/emission_factors';
-jest.mock('../../infra/db/emission_factors.json', () => (require('../mocks/emission_factors').mockedEmissionFactors));
+import { TransportationEmissionService } from '../../src/infra/services/TransportationEmissionService';
+import { Transportation, TransportType } from '../../src/domain/entities/transportation';
+const mockedEmissionFactors = require('../mocks/emission_factors').mockedEmissionFactors;
 
+jest.mock('../../src/infra/db/emission_factors.json', () => require('../mocks/emission_factors').mockedEmissionFactors);
 describe('TransportationEmissionService', () => {
   it('calculates emissions for multiple vehicles', () => {
     const service = new TransportationEmissionService();
