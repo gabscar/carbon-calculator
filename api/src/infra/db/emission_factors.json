@@ -1,0 +1,80 @@
+{
+  "transportation": {
+    "car": {
+      "unit": "mile",
+      "emission_factor": 0.404,
+      "description": "Medium gasoline-powered passenger car, kg CO2e per mile"
+    },
+    "bus": {
+      "unit": "mile",
+      "emission_factor": 0.089,
+      "description": "Urban bus, kg CO2e per mile"
+    },
+    "train": {
+      "unit": "mile",
+      "emission_factor": 0.045,
+      "description": "Rail transport, kg CO2e per mile"
+    },
+    "airplane_short": {
+      "unit": "mile",
+      "emission_factor": 0.255,
+      "description": "Short domestic flight, kg CO2e per mile"
+    },
+    "airplane_long": {
+      "unit": "mile",
+      "emission_factor": 0.156,
+      "description": "Long international flight, kg CO2e per mile"
+    }
+  },
+  "energy": {
+    "electricity": {
+      "unit": "kWh",
+      "emission_factor": 0.4,
+      "description": "Average electricity consumption in the US, kg CO2e per kWh"
+    },
+    "natural_gas": {
+      "unit": "therm",
+      "emission_factor": 5.3,
+      "description": "Residential natural gas, kg CO2e per therm"
+    },
+    "fuel_oil": {
+      "unit": "gallon",
+      "emission_factor": 10.21,
+      "description": "Residential fuel oil, kg CO2e per gallon"
+    },
+    "propane": {
+      "unit": "gallon",
+      "emission_factor": 5.75,
+      "description": "Residential propane, kg CO2e per gallon"
+    }
+  },
+  "waste": {
+    "recycle_paper": {
+      "unit": "boolean",
+      "emission_factor": -0.19,
+      "description": "Paper recycling, CO2e reduction per person per year"
+    },
+    "recycle_plastic": {
+      "unit": "boolean",
+      "emission_factor": -0.16,
+      "description": "Plastic recycling, CO2e reduction per person per year"
+    },
+    "recycle_metal": {
+      "unit": "boolean",
+      "emission_factor": -0.18,
+      "description": "Metal recycling, CO2e reduction per person per year"
+    },
+    "no_recycling": {
+      "unit": "person",
+      "emission_factor": 0.69,
+      "description": "Person who does not recycle, kg CO2e emitted per year"
+    }
+  },
+  "diet": {
+    "average": {
+      "unit": "person",
+      "emission_factor": 2.5,
+      "description": "Average diet, tons of CO2e per year"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+import { TransportType } from '../../domain/entities/transportation';
+import { CarbonCalculatorController } from '../../infra/controllers/api/carbonCalculatorController';
+import { Request, Response } from 'express';
+
+
+jest.mock('../../infra/db/emission_factors.json', () => (require('../mocks/emission_factors').mockedEmissionFactors));
+
+
+describe('CarbonCalculatorController', () => {
+  let controller: CarbonCalculatorController;
+  let mockRequest: Partial<Request>;
+  let mockResponse: Partial<Response>;
+
+  beforeEach(() => {
+    controller = new CarbonCalculatorController();
+    mockRequest = {};
+    mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn().mockReturnThis()
+    };
+  });
+
+  it('should exec total emissions for a valid request', async () => {
+    mockRequest.body = {
+      transportation: [
+        { type: TransportType.CAR, distance: 100 },
+        { type: TransportType.BUS, distance: 50 }
+      ],
+      energy: {
+        electricity: 200,
+        natural_gas: 10
+      },
+      waste: {
+        recycle_paper: true,
+        recycle_plastic: false,
+        recycle_metal: true,
+        no_recycling: false
+      },
+      persons: 1
+    };
+
+    await controller.exec(mockRequest as Request, mockResponse as Response);
+
+    expect(mockResponse.status).toHaveBeenCalledWith(200);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+      totalEmissions: expect.objectContaining({
+        dietEmissions: 2500,
+        transportationEmissions: 44.85000000000001,
+        energyEmissions: 133,
+        wasteEmissions: -0.37
+      }),
+      "unit": "kg CO2e"
+    });
+  });
+
+  it('should return 0 for empty input', async () => {
+    mockRequest.body = {
+      transportation: [],
+      energy: {},
+      waste: {},
+      persons: 1
+    };
+
+    await controller.exec(mockRequest as Request, mockResponse as Response);
+
+    expect(mockResponse.status).toHaveBeenCalledWith(200);
+    expect(mockResponse.json).toHaveBeenCalledWith({
+      totalEmissions: expect.objectContaining({
+        dietEmissions: 2500,
+        transportationEmissions: 0,
+        energyEmissions: 0,
+        wasteEmissions: 0
+      }),
+      "unit": "kg CO2e"
+    });
+  });
+}); 
