@@ -10,6 +10,7 @@ import { CalculateCarbonService, type CalculateCarbonResponse } from '@/api/serv
 import { carbonCalculatorSchemaValidation, type CarbonCalculatorFormInput } from '@/components/forms/carbonForm/types';
 import { scrollToRef } from '@/utils/scrollToRef';
 import { toast } from 'react-toastify';
+import { useTheme } from '@mui/material/styles';
 
 const CarbonCalculator: React.FC = () => {
   const { control, handleSubmit } = useForm<CarbonCalculatorFormInput>({
@@ -50,11 +51,13 @@ const CarbonCalculator: React.FC = () => {
     }
   };
 
+  const theme = useTheme();
+
   return (
     <Grid container spacing={5}>
       <Grid size={{ xs: 12, md: 8 }}>
         <Box
-          bgcolor="white"
+          sx={{ background: theme.palette.resultBox.main, color: theme.palette.resultBox.contrastText, borderRadius: 2, p: 3 }}
           borderRadius={2}
           p={4}
           boxShadow={2}

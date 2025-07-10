@@ -1,10 +1,11 @@
 import type { CalculateCarbonResponse } from '@/api/services/calculateCarbon';
 import { Box, Typography } from '@mui/material';
-
+import { useTheme } from '@mui/material/styles';
 
 
 export const ResultCalculator = ({ transportationEmissions, energyEmissions, wasteEmissions, dietEmissions, totalEmissions, unit }: CalculateCarbonResponse) => {
-    return (<Box bgcolor="white" borderRadius={2} p={4} boxShadow={2}  >
+    const theme = useTheme();
+    return (<Box  sx={{ background: theme.palette.resultBox.main, color: theme.palette.resultBox.contrastText, borderRadius: 2, p: 3 }} borderRadius={2} p={4} boxShadow={2}  >
         <Typography variant="h6" gutterBottom >
             Results
         </Typography>

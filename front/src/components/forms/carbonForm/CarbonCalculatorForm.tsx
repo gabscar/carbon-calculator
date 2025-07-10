@@ -83,8 +83,8 @@ const CarbonCalculatorForm = ({ control, loading }: CarbonCalculatorFormProps) =
             content: (
                 <Box display="flex" flexDirection="column" gap={2}>
                     <TextInput name="energy.electricity" label="Eletricity (kWh)" control={control} type="number" />
-                    <TextInput name="energy.fuel_oil" label="Fuel oil (galão)" control={control} type="number" />
-                    <TextInput name="energy.propane" label="Propane (galão)" control={control} type="number" />
+                    <TextInput name="energy.fuel_oil" label="Fuel oil (gal)" control={control} type="number" />
+                    <TextInput name="energy.propane" label="Propane (gal)" control={control} type="number" />
                 </Box>
             ),
         },

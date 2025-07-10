@@ -7,7 +7,7 @@ import {
   Box,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import { useTheme } from "@mui/material/styles";
 type Step = {
   title: string;
   content: React.ReactNode;
@@ -23,7 +23,7 @@ type Props = {
 
 const AccordionSteps: React.FC<Props> = ({ steps, expandedPanels, onChangePanels }) => {
   const [expanded, setExpanded] = useState<number[]>([]);
-
+  const theme = useTheme();
   useEffect(() => {
     if (expandedPanels) {
       const newExpanded = new Set([...expanded, ...expandedPanels]);
@@ -49,7 +49,8 @@ const AccordionSteps: React.FC<Props> = ({ steps, expandedPanels, onChangePanels
           key={index}
           expanded={expanded.includes(index)}
           onChange={handleChange(index)}
-          className="bg-white mb-1"
+          sx={{ background: theme.palette.resultBox.main, color: theme.palette.resultBox.contrastText}}
+          className="mb-1"
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />} className="py-2">
             {step.icon && <Box sx={{ mr: 2 }}>{step.icon}</Box>}
