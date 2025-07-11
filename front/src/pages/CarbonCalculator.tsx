@@ -86,7 +86,7 @@ const CarbonCalculator: React.FC = () => {
         </Box>
       </Grid>
 
-      <Grid size={{ xs: 10, md: 4 }}>
+      <Grid size={{ xs: 12, md: 4 }}>
         <div ref={sectionRef}>
           <ResultCalculator
             transportationEmissions={result.transportationEmissions}

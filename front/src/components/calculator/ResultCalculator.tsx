@@ -6,6 +6,11 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { useEffect, useState } from 'react';
 import { getEcoLevel, getMedal, getPlanetIcon, getTrees, GLOBAL_AVERAGE } from './GamificationRules';
+import { PiTreeFill } from 'react-icons/pi';
+import { FaEarthAmericas } from "react-icons/fa6";
+import { BsTrash2 } from "react-icons/bs";
+import { SlEnergy } from "react-icons/sl";
+import { FaCarAlt } from "react-icons/fa";
 
 type ResultCalculatorProps = CalculateCarbonResponse & {
   onReset: () => void;
@@ -17,9 +22,9 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
   const theme = useTheme();
   const [showCongrats, setShowCongrats] = useState(false);
   const totalYear = Math.round(totalEmissions * 12 * 100) / 100;
-  const medal = getMedal(totalYear/persons);
-  const eco = getEcoLevel(totalYear/persons);
-  const planetIcon = getPlanetIcon(totalYear/persons);
+  const medal = getMedal(totalYear / persons);
+  const eco = getEcoLevel(totalYear / persons);
+  const planetIcon = getPlanetIcon(totalYear / persons);
   const trees = getTrees(totalYear);
 
   useEffect(() => {
@@ -37,7 +42,7 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
 
 
   return (
-    <Box sx={{ background: theme.palette.resultBox.main, color: theme.palette.resultBox.contrastText }} className='d-flex flex-column gap-2' borderRadius={2} p={4} boxShadow={2}>
+    <Box sx={{ background: theme.palette.resultBox.main, color: theme.palette.resultBox.contrastText }} className='d-flex flex-column gap-md-2 ' borderRadius={2} p={4} boxShadow={2}>
       {showCongrats && <Fade in={showCongrats} timeout={1000} >
         <Box>
           <Alert severity={medal.color as any} icon={<EmojiEventsIcon />} sx={{ mb: 2, fontWeight: 'bold', fontSize: 18 }}>
@@ -62,15 +67,20 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
                 },
               }}
             />
-            <Typography align="center" mt={1} fontWeight={600}>
+            <Box display="flex" alignItems="center" gap={1} justifyContent="center" mt={1} fontWeight={600}>
               {eco.label}
-            </Typography>
+            </Box>
           </Box>
           <Box textAlign="center" mb={2}>
             <Typography variant="body2">
               Estimated CO₂ per year: <b>{totalYear.toLocaleString()} {unit.replace('month', '')}</b><br />
-              That’s equivalent to planting <b>{trees}</b> trees 🌳
             </Typography>
+            <Box display="flex" alignItems="center" justifyContent="center" gap={1}>
+              <Typography variant="body2" component="span">
+                That’s equivalent to planting <b>{trees}</b> trees
+              </Typography>
+              <PiTreeFill color='green' size={22} />
+            </Box>
           </Box>
           <Box mb={2}>
             <Typography align="center" variant="body2">
@@ -87,20 +97,20 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
         Results
       </Typography>
       <Typography variant="body1">
-        🚗 Transportation: <strong>{transportationEmissions} {unit} </strong>
+        <FaCarAlt/> Transportation: <strong>{transportationEmissions} {unit} </strong>
       </Typography>
       <Typography variant="body1">
-        🔌 Energy: <strong>{energyEmissions} {unit} </strong>
+        <SlEnergy/>Energy: <strong>{energyEmissions} {unit} </strong>
       </Typography>
       <Typography variant="body1">
-        🗑️ Waste: <strong>{wasteEmissions} {unit} </strong>
+        <BsTrash2/> Waste: <strong>{wasteEmissions} {unit} </strong>
       </Typography>
       <Box mt={2} borderTop="1px solid #ccc" pt={2}>
         <Typography variant="h6">
-          🌍 Total: <strong>{totalEmissions} {unit} </strong>
+          <FaEarthAmericas /> Total: <strong>{totalEmissions} {unit} </strong>
         </Typography>
         <Typography variant="h6">
-          🌍 Total Year: <strong>{totalYear} {unit.replace('/month', '')} </strong>
+          <FaEarthAmericas /> Total Year: <strong>{totalYear} {unit.replace('/month', '')} </strong>
         </Typography>
       </Box>
 

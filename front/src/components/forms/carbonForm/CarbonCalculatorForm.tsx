@@ -6,10 +6,10 @@ import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CustomButton from '@/components/button/Button';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import FlashOnIcon from '@mui/icons-material/FlashOn';
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import type { CarbonCalculatorFormProps } from './types';
+import { BsTrash2 } from "react-icons/bs";
+import { SlEnergy } from "react-icons/sl";
+import { FaCarAlt } from "react-icons/fa";
 
 const CarbonCalculatorForm = ({ control, loading }: CarbonCalculatorFormProps) => {
 
@@ -24,7 +24,7 @@ const CarbonCalculatorForm = ({ control, loading }: CarbonCalculatorFormProps) =
     const steps = [
         {
             title: 'Vehicles',
-            icon: <DirectionsCarIcon color="primary" />,
+            icon: <FaCarAlt color="primary" />,
             description: 'Add the number of vehicles you have and the distance you travel per month.',
             content: (
                 <>
@@ -78,7 +78,7 @@ const CarbonCalculatorForm = ({ control, loading }: CarbonCalculatorFormProps) =
         },
         {
             title: 'Energy',
-            icon: <FlashOnIcon color="secondary" />,
+            icon: <SlEnergy color="secondary" />,
             description: 'Add the amount of energy you consume per month.',
             content: (
                 <Box display="flex" flexDirection="column" gap={2}>
@@ -90,7 +90,7 @@ const CarbonCalculatorForm = ({ control, loading }: CarbonCalculatorFormProps) =
         },
         {
             title: 'Waste',
-            icon: <DeleteSweepIcon color="error" />,
+            icon: <BsTrash2 color="error" />,
             description: 'If you recycle, add the amount of waste you recycle per month, this will help us calculate the carbon footprint of your waste.',
             content: (() => {
                 const recyclePaper = useWatch({ control, name: 'waste.recycle_paper' });
