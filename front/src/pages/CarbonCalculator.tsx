@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 import { useTheme } from '@mui/material/styles';
 
 const CarbonCalculator: React.FC = () => {
-  const { control, handleSubmit } = useForm<CarbonCalculatorFormInput>({
+  const { control, handleSubmit,reset,watch } = useForm<CarbonCalculatorFormInput>({
     resolver: zodResolver(carbonCalculatorSchemaValidation),
     defaultValues: {
       transportation: [{ type: 'car', distance: 0, isMantainance: false }],
@@ -27,13 +27,13 @@ const CarbonCalculator: React.FC = () => {
       persons: 1,
     },
   });
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<CalculateCarbonResponse>({
     transportationEmissions: 0,
     energyEmissions: 0,
     wasteEmissions: 0,
-    dietEmissions: 0,
     totalEmissions: 0,
     unit: 'kg CO2e',
   });
@@ -50,6 +50,18 @@ const CarbonCalculator: React.FC = () => {
       scrollToRef(sectionRef as React.RefObject<HTMLElement>);
     }
   };
+
+
+  const resetResult = () => {
+    reset();
+    setResult({
+      transportationEmissions: 0,
+      energyEmissions: 0,
+      wasteEmissions: 0,
+      totalEmissions: 0,
+      unit: 'kg CO2e',
+    });
+  }
 
   const theme = useTheme();
 
@@ -80,9 +92,10 @@ const CarbonCalculator: React.FC = () => {
             transportationEmissions={result.transportationEmissions}
             energyEmissions={result.energyEmissions}
             wasteEmissions={result.wasteEmissions}
-            dietEmissions={result.dietEmissions}
+            onReset={() => resetResult()}
             totalEmissions={result.totalEmissions}
             unit={result.unit}
+            persons={watch('persons') as number}
           />
         </div>
       </Grid>

@@ -4,7 +4,6 @@ import { CarbonCalculatorUseCase } from '../../src/usecases/CarbonCalculatorUseC
 import { TransportationEmissionService } from '../../src/infra/services/TransportationEmissionService';
 import { EnergyEmissionService } from '../../src/infra/services/EnergyEmissionService';
 import { WasteEmissionService } from '../../src/infra/services/WasteEmissionService';
-import { DietEmissionService } from '../../src/infra/services/DietEmissionService';
 import { CarbonCalculatorInput } from '../../src/domain/usecase/carbonCalculatorUseCase';
 import { TransportType } from '../../src/domain/entities/transportation';
 import { RoundMethods } from '../../src/utils/round';
@@ -14,8 +13,7 @@ describe('CarbonCalculatorUseCase', () => {
   const useCase = new CarbonCalculatorUseCase(
     new TransportationEmissionService(),
     new EnergyEmissionService(),
-    new WasteEmissionService(),
-    new DietEmissionService()
+    new WasteEmissionService()
   );
 
   it('calculates emissions for multiple cars and energy/waste/diet', async () => {
@@ -56,10 +54,9 @@ describe('CarbonCalculatorUseCase', () => {
     (input.waste.recycle_metal ? mockedEmissionFactors.waste.recycle_metal.emission_factor : 0) +
     (input.waste.no_recycling ? mockedEmissionFactors.waste.no_recycling.emission_factor : 0))/12);
 
-    const diet = RoundMethods.roundToTwoDecimals(mockedEmissionFactors.diet.average.emission_factor/12 * input.persons*1000);
     
-    const expected = transportation + energy + waste + diet;
-    expect(result.transportationEmissions + result.energyEmissions + result.wasteEmissions + result.dietEmissions).toBeCloseTo(expected, 2);
+    const expected = transportation + energy + waste ;
+    expect(result.transportationEmissions + result.energyEmissions + result.wasteEmissions).toBeCloseTo(expected, 2);
   });
 
   it('returns 0 for empty input', async () => {
@@ -70,7 +67,6 @@ describe('CarbonCalculatorUseCase', () => {
       persons: 1
     };
     const result = await useCase.exec(input);
-    const expected = RoundMethods.roundToTwoDecimals(mockedEmissionFactors.diet.average.emission_factor/12 * input.persons*1000);
-    expect(result.transportationEmissions + result.energyEmissions + result.wasteEmissions + result.dietEmissions).toBe(expected);
+    expect(result.transportationEmissions + result.energyEmissions + result.wasteEmissions).toBe(0);
   });
 }); 

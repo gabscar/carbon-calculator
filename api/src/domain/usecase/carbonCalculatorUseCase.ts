@@ -7,7 +7,6 @@ export interface ICarbonCalculatorUseCaseResponse {
   transportationEmissions: number;
   energyEmissions: number;
   wasteEmissions: number;
-  dietEmissions: number;
   totalEmissions: number;
   unit:string
 }

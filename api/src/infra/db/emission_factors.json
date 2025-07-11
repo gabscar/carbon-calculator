@@ -69,12 +69,5 @@
       "emission_factor": 0.69,
       "description": "Person who does not recycle, kg CO2e emitted per year"
     }
-  },
-  "diet": {
-    "average": {
-      "unit": "person",
-      "emission_factor": 2.5,
-      "description": "Average diet, tons of CO2e per year"
-    }
   }
 }

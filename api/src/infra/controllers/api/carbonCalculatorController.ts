@@ -4,7 +4,6 @@ import { BaseController } from '../baseController';
 import { TransportationEmissionService } from '../../services/TransportationEmissionService';
 import { EnergyEmissionService } from '../../services/EnergyEmissionService';
 import { WasteEmissionService } from '../../services/WasteEmissionService';
-import { DietEmissionService } from '../../services/DietEmissionService';
 import { CarbonCalculatorUseCase } from '../../../usecases/CarbonCalculatorUseCase';
 import { RequestValidator } from '../../http/validators/baseValidator';
 import { carbonCalculatorSchema } from '../../http/validators/calculator/carbonCalculatorValidator';
@@ -19,7 +18,6 @@ export class CarbonCalculatorController extends BaseController {
       new TransportationEmissionService(),
       new EnergyEmissionService(),
       new WasteEmissionService(),
-      new DietEmissionService()
     );
   }
 

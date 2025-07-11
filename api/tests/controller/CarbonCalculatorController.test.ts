@@ -42,12 +42,11 @@ describe('CarbonCalculatorController', () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      'dietEmissions': 208.33,
       'transportationEmissions': 44.85,
       'energyEmissions': 133,
       'wasteEmissions': -0.03,
-      "unit": "kg CO2e",
-      'totalEmissions': 386.15
+      "unit": "kg CO2e /month",
+      'totalEmissions': 177.82
     });
   });
 
@@ -63,12 +62,11 @@ describe('CarbonCalculatorController', () => {
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
     expect(mockResponse.json).toHaveBeenCalledWith({
-      dietEmissions: 208.33,
       transportationEmissions: 0,
       energyEmissions: 0,
       wasteEmissions: 0,
-      totalEmissions: 208.33,
-      "unit": "kg CO2e"
+      totalEmissions: 0,
+      "unit": "kg CO2e /month"
     });
   });
 }); 
