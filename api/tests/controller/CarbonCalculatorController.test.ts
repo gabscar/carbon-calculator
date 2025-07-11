@@ -22,8 +22,8 @@ describe('CarbonCalculatorController', () => {
   it('should exec total emissions for a valid request', async () => {
     mockRequest.body = {
       transportation: [
-        { type: TransportType.CAR, distance: 100 },
-        { type: TransportType.BUS, distance: 50 }
+        { type: TransportType.CAR, distance: 100, isMantainance: true },
+        { type: TransportType.BUS, distance: 50, isMantainance: true }
       ],
       energy: {
         electricity: 200,

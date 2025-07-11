@@ -8,7 +8,7 @@ export class TransportationEmissionService implements ITransportationEmissionSer
 
     return items.reduce((total, transport) => {
       const emissionFactor = emissionFactors.transportation[transport.type].emission_factor;
-      const emissions = transport.distance * emissionFactor * (transport.isMantainance ? 1.1 : 1);
+      const emissions = transport.distance * emissionFactor * (transport.isMantainance ? 1 : 1.1);
       return total + emissions;
     }, 0);
   }

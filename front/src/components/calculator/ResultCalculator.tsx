@@ -70,12 +70,6 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
             </Typography>
           </Box>
           <Box textAlign="center" mb={2}>
-            <Typography variant="h4" component="div" sx={{ animation: animate ? 'bounce 1s' : 'none' }}>
-              🎉
-            </Typography>
-            <Typography variant="subtitle1" fontWeight={600}>
-              You helped save the planet a little more today!
-            </Typography>
             <Typography variant="body2">
               Estimated CO₂ per year: <b>{totalYear.toLocaleString()} {unit.replace('month', '')}</b><br />
               That’s equivalent to planting <b>{trees}</b> trees 🌳
@@ -117,9 +111,6 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
         <Button onClick={resetGame} startIcon={<RestartAltIcon />} color="secondary" variant="outlined">
           Reset Footprint
         </Button>
-        <Typography variant="body2" mt={1}>
-          Nova tentativa: Melhore sua pegada!
-        </Typography>
       </Box>
 
     </Box>

@@ -2,6 +2,7 @@
 ARG PORT=3001
 
 FROM node:20-alpine AS builder
+ENV NODE_ENV=${NODE_ENV:-production}
 
 WORKDIR /usr/src/app
 

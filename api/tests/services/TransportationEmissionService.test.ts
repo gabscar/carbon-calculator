@@ -8,10 +8,10 @@ describe('TransportationEmissionService', () => {
     const service = new TransportationEmissionService();
     const input = [
       { type: TransportType.CAR, distance: 100 },
-      { type: TransportType.BUS, distance: 50 }
+      { type: TransportType.BUS, distance: 50}
     ].map(item=>new Transportation(item.type,item.distance));
     const result = service.exec(input);
-    const expected = 100 * mockedEmissionFactors.transportation.car.emission_factor + 50 * mockedEmissionFactors.transportation.bus.emission_factor;
+    const expected = 100 * mockedEmissionFactors.transportation.car.emission_factor * 1.1 + 50 * mockedEmissionFactors.transportation.bus.emission_factor * 1.1;
     expect(result).toBeCloseTo(expected, 2);
   });
 
