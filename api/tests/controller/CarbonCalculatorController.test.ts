@@ -1,5 +1,5 @@
 import { TransportType } from '../../src/domain/entities/transportation';
-import { CarbonCalculatorController } from '../../src/infra/controllers/api/carbonCalculatorController';
+import { CarbonCalculatorController } from '../../src/interface/controllers/api/carbonCalculatorController';  
 import { Request, Response } from 'express';
 
 

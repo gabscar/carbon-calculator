@@ -1,5 +1,5 @@
 import z from "zod";
-import { carbonCalculatorSchema } from "../../infra/http/validators/calculator/carbonCalculatorValidator";
+import { carbonCalculatorSchema } from "../../interface/http/validators/calculator/carbonCalculatorValidator";
 
 
 
