@@ -16,7 +16,6 @@ type ResultCalculatorProps = CalculateCarbonResponse & {
 export const ResultCalculator = ({ transportationEmissions, energyEmissions, wasteEmissions, totalEmissions, unit, onReset, persons }: ResultCalculatorProps) => {
   const theme = useTheme();
   const [showCongrats, setShowCongrats] = useState(false);
-  const [animate, setAnimate] = useState(false);
   const totalYear = Math.round(totalEmissions * 12 * 100) / 100;
   const medal = getMedal(totalYear/persons);
   const eco = getEcoLevel(totalYear/persons);
@@ -25,7 +24,6 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
 
   useEffect(() => {
     if (totalEmissions > 0) {
-      setAnimate(true);
       setShowCongrats(true);
     }
 
@@ -33,7 +31,6 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
 
 
   const resetGame = () => {
-    setAnimate(false);
     setShowCongrats(false);
     onReset();
   };

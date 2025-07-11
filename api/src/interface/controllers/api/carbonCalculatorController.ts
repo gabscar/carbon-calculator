@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
 import { BaseController } from '../baseController';
-import { TransportationEmissionService } from '../../services/TransportationEmissionService';
-import { EnergyEmissionService } from '../../services/EnergyEmissionService';
-import { WasteEmissionService } from '../../services/WasteEmissionService';
+import { TransportationEmissionService } from '../../../infra/services/TransportationEmissionService';
+import { EnergyEmissionService } from '../../../infra/services/EnergyEmissionService';
+import { WasteEmissionService } from '../../../infra/services/WasteEmissionService';
 import { CarbonCalculatorUseCase } from '../../../usecases/CarbonCalculatorUseCase';
 import { RequestValidator } from '../../http/validators/baseValidator';
 import { carbonCalculatorSchema } from '../../http/validators/calculator/carbonCalculatorValidator';
