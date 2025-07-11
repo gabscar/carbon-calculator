@@ -27,6 +27,10 @@ export const ResultCalculator = ({ transportationEmissions, energyEmissions, was
             <Typography variant="h6" >
                 🌍 Total: <strong>{totalEmissions} {unit} </strong>
             </Typography>
+            <Typography variant="h6" >
+                🌍 Total Year: <strong>{totalEmissions*12} {unit.replace('month','')} </strong>
+            </Typography>
         </Box>
+        
     </Box>)
 };

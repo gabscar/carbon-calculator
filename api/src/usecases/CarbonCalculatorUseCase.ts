@@ -21,6 +21,6 @@ export class CarbonCalculatorUseCase implements ICarbonCalculatorUseCase {
     const dietEmissions = RoundMethods.roundToTwoDecimals(this.dietService.exec(input.persons) * 1000);
     const totalEmissions = transportationEmissions + energyEmissions + wasteEmissions + dietEmissions;
     
-    return { transportationEmissions, energyEmissions, wasteEmissions, dietEmissions, totalEmissions };
+    return { transportationEmissions, energyEmissions, wasteEmissions, dietEmissions, totalEmissions,unit: 'kg CO2e /month', };
   }
 } 
