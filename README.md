@@ -17,7 +17,7 @@ Follow these steps to get your development environment set up.
 
 ```bash
 git clone git@github.com:gabscar/carbon-calculator.git
-cd carbon-calculator-2
+cd carbon-calculator
 ```
 
 ### 2. Install Dependencies
