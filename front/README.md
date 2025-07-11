@@ -2,7 +2,7 @@
 
 This is the frontend for the Carbon Footprint Calculator project, built with React and Material-UI (MUI).
 
-![App Screenshot](./front_img.png)
+![App Screenshot](./projectImg/front_img.png)
 
 ## Features
 - Modern UI with Material-UI
